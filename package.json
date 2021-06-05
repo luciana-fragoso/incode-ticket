@@ -1,0 +1,26 @@
+{
+  "name": "complain-me",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "connect-mongo": "^3.2.0",
+    "create-react-app": "^3.0.1",
+    "ejs": "^3.0.2",
+    "express": "^4.16.2",
+    "express-session": "^1.17.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.0.7"
+  },
+  "description": "Il vous faut créer votre premier utilisateur afin de pouvoir vous connecter à l'interface. Voici les étapes :",
+  ,
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/incoadmin/Projet-10_Ajustez-un-projet/issues"
+  },
+  "homepage": "https://github.com/incoadmin/Projet-10_Ajustez-un-projet#readme"
+}
