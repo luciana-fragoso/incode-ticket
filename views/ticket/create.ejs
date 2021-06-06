@@ -4,44 +4,53 @@
     <body>
         <%- include('../shared/navbar', {}) %>
         <div>
-            <h3>Créer un nouveau ticket</h3>
+            <h2 class="title">Create Ticket</h2>
             <form method="POST" action="/ticket/create">
                 <div class="form-group">
-                    <label>Titre: </label>
+                    <label class="subtitle">Title </label>
                     <input type="text" class="form-control" name="title" />
                 </div>
 
                 <div class="form-group">
-                    <label>Description: </label>
+                    <label  class="subtitle">Description </label>
                     <textarea  type="text" class="form-control" name="description"></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label>Responsable: </label>
-                    <input type="text" class="form-control" name="responsible" />
-                </div>
+                <% if (role === "admin") { %>
+                    <div class="form-group">
+                        <label  class="subtitle">Assigned to </label>
+                        <select name="assignedTo" id="assignedTo"  class="form-control">
+                            <option value="" selected>Choose user</option>
+                            <% for (var i=0;i<users.length;i++) {%>
+                            <option value="<%-users[i].email%>"><%- users[i].email %></option>
+                            <% } %>
+                            </select>
+                           
+                    </div>
+                <%}%>
 
                 <div class="form-group">
-                    <label>Priorité: </label>
+                    <label  class="subtitle">Priority </label>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="priority" value="Low" />
-                        <label class="form-check-label">Basse</label>
+                        <label class="form-check-label">Low</label>
                     </div>
 
                     <div class="form-check form-check-inline">
                         <input  class="form-check-input" type="radio" name="priority" value="Medium" />
-                        <label class="form-check-label">Moyen</label>
+                        <label class="form-check-label">Medium</label>
                     </div>
 
                     <div class="form-check form-check-inline">
                         <input  class="form-check-input" type="radio" name="priority" value="High" />
-                        <label class="form-check-label">Haute</label>
+                        <label class="form-check-label">High</label>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" />
                 </div>
+            
             </form>
         </div>
     </body>

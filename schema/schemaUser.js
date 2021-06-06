@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const bcrypt = require("bcrypt");
 
 var userSchema = mongoose.Schema({
 	email: {
@@ -13,13 +14,19 @@ var userSchema = mongoose.Schema({
 	password: {
         type: String,
         required: true
-    }
+    }, 
+	role: {
+		type: String,
+		default: 'user',
+        enum: ["user", "admin"]
+	}
+	
 },{ timestamps: { createdAt: 'created_at' }})
 
 
 userSchema.methods = {
-	authenticate: function (password) {
-		return password === this.password;
+	authenticate: async function (password) {
+		return await bcrypt.compare(password,this.password);
 	},
 	getToken: function () {
 		return jwt.sign({email: this.email}, config.secret, {expiresIn: '1d'});

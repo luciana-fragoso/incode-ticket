@@ -4,13 +4,22 @@
     <body>
         <%- include('../shared/navbar', {}) %>
         <div class="details">
-            <h1>Details Ticket</h1>
-            <h2>Id : <%= ticket.id %></h2>
-            <h2>Titre : <%= ticket.title %></h2>
-            <h2>Description : <%= ticket.description %></h2>
-            <h2>Responsable : <%= ticket.responsible %></h2>
-            <h2>Priorité : <%= ticket.priority %></h2>
-            <h2>Statut : <%= ticket.completed ? "Résolu" : "En cours" %></h2>
+            <h1  class="title">Ticket's Details</h1>
+            <h2 class="subtitle">Id - <span class="show-page"><%= ticket.id %></span></h2>
+            <h2 class="subtitle">Title - <span class="show-page"><%= ticket.title %></span> </h2>
+            <h2 class="subtitle">Description - <span class="show-page"><%= ticket.description %></span></h2>
+            <h2 class="subtitle">Priority - <span class="show-page"> <%= ticket.priority %></span></h2>
+            <h2 class="subtitle">Status - <span class="show-page"> <%= ticket.completed  ? "Solved" : "In progress" %></span></h2>
+            <h2 class="subtitle">Creator email - <span class="show-page"><%= ticket.createdBy %></span> </h2>
+            <h2 class="subtitle">Assigned to - <span class="show-page"> <%= ticket.assignedTo !== undefined ? ticket.assignedTo : "Not yet" %></span></h2>
+            <% if (ticket.comment.length > 0) { %>
+            <h2 class="subtitle">Comment(s)</h2>
+           <div class="comments">
+            <% for (var i=0;i<ticket.comment.length;i++) {%>
+               <p class="comment">"<%= ticket.comment[i] %>"</p>
+                <% } %>
+                <% } %>
+            </div>
         </div>
     </body>
 </html>

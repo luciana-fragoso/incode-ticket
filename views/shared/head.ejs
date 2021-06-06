@@ -3,4 +3,10 @@
     <% css.forEach(style => { %>
         <link rel='stylesheet' type="text/css" href='<%= `/css/${style}.css` %>') />
     <% }); %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="<%= `/js/filter.js` %>"></script>
+    <link rel="stylesheet" href="<%= `/font-awesome/css/font-awesome.min.css` %>">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    
 </head>

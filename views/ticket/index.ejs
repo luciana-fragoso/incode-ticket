@@ -4,22 +4,33 @@
     <body>
         <%- include('../shared/navbar', {}) %>
         <div>
-            <h1>Liste des tickets</h1>
-            <table>
+            <h1 class="title">Ticket List</h1>
+            <select id="assignedSelect">
+                <option value=true>Assigned</option>
+                <option value=false>Not Assigned</option>
+            </select>
+            <table id="searchTable">
                 <thead>
                     <tr>
-                        <th class="idTicket">Tichet ID</th>
-                        <th class="showTicket">Voir Ticket</th>
-                        <th class="editTicket">Editer Ticket</th>
+                        <th >Status</t>
+                        <th class="idTicket">Title</th>
+                        <th class="showTicket">See</th>
+                        <th class="editTicket">Edit</th>
                     </tr>
                 </thead>
                 <tbody>
                     <% for (index = 0; index < tickets.length; index++) { %>
                         <% const ticket = tickets[index] %>
                         <tr key={index}>
-                            <td><%= ticket._id %></td>
-                            <td><a href="/ticket/<%= ticket._id %>" class="nav-link">Voir</a></td>
-                            <td><a href="/ticket/<%= ticket._id %>/edit" class="nav-link">Editer</a></td>
+                            <% if (ticket.completed) { %>
+                                <td class="statusTicket"><i class="completedIcon fa fa-check-circle"></i></td>
+                            <% } else { %>
+                                    <td class="statusTicket"><i class="notCompletedIcon fa fa-times-circle"></i></td>
+                            <% } %>
+                            <td class="capitalize"><%= ticket.title %></td>
+                           <div>
+                            <td><a href="/ticket/<%= ticket._id %>" class="nav-link"><i class="iconSee fa fa-search"></i></a></td>
+                            <td><a href="/ticket/<%= ticket._id %>/edit" class="nav-link"><i class="iconEdit fa fa-pencil"></i></a></td>
                         </tr>
                     <% } %>
                 </tbody>

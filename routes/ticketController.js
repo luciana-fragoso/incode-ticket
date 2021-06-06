@@ -12,14 +12,14 @@ const authenticateJWT = (req, res, next) => {
 
         jwt.verify(token, config.secret, (err, user) => {
             if (err) {
-                return res.status(200).render('account/login', {title: 'Connexion'});
+                return res.status(200).render('account/login', {title: 'Connection'});
             }
 
             req.user = user;
             next();
         });
     } else {
-        res.status(200).render('account/login', {title: 'Connexion'});
+        res.status(200).render('account/login', {title: 'Connection'});
     }
 };
 
@@ -29,5 +29,8 @@ router.get('/:id', authenticateJWT, ticket.show);
 router.get('/:id/edit', authenticateJWT, ticket.edit);
 router.post('/:id/update', authenticateJWT, ticket.update);
 router.get('/', authenticateJWT, ticket.list);
+
+
+router.post('/filter', authenticateJWT, ticket.filter);
 
 module.exports = router;

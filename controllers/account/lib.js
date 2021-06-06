@@ -1,16 +1,20 @@
 const User = require('../../schema/schemaUser.js');
+const bcrypt = require("bcrypt");
 
-function signup(req, res) {
+async function signup(req, res) {
     if (!req.body.email || !req.body.password) {
-        //Le cas où l'email ou bien le password ne serait pas soumit ou nul
         console.log(req.body);
         res.status(400).json({
-            "text": "Requête invalide"
+            "text": "Invalid request"
         })
     } else {
+        const salt = await bcrypt.genSalt(10);
+        var hashedPassword = await bcrypt.hash(req.body.password, salt);
+        var role = "user";
         var user = {
             email: req.body.email,
-            password: req.body.password
+            password: hashedPassword,
+            role: role
         }
         var findUser = new Promise(function (resolve, reject) {
             User.findOne({
@@ -33,7 +37,7 @@ function signup(req, res) {
             _u.save(function (err, user) {
                 if (err) {
                     res.status(500).json({
-                        "text": "Erreur interne"
+                        "text": "Internal error"
                     })
                 } else {
                     req.session.token = user.getToken();
@@ -44,17 +48,17 @@ function signup(req, res) {
             switch (error) {
                 case 500:
                     res.status(500).json({
-                        "text": "Erreur interne"
+                        "text": "Internal error"
                     })
                     break;
                 case 200:
                     res.status(200).json({
-                        "text": "L'adresse email existe déjà"
+                        "text": "Email address already in use"
                     })
                     break;
                 default:
                     res.status(500).json({
-                        "text": "Erreur interne"
+                        "text": "Internal error"
                     })
             }
         })
@@ -67,9 +71,8 @@ function signupForm(req, res) {
 
 function login(req, res) {
     if (!req.body.email || !req.body.password) {
-        //Le cas où l'email ou bien le password ne serait pas soumit ou nul
         res.status(400).json({
-            "text": "Requête invalide"
+            "text": "Invalid request"
         })
     } else {
         User.findOne({
@@ -77,12 +80,12 @@ function login(req, res) {
         }, function (err, user) {
             if (err) {
                 res.status(500).json({
-                    "text": "Erreur interne"
+                    "text": "Internal error"
                 })
             }
             else if(!user){
                 res.status(401).json({
-                    "text": "L'utilisateur n'existe pas"
+                    "text": "The user does not exist"
                 })
             }
             else {
@@ -92,7 +95,7 @@ function login(req, res) {
                 }
                 else{
                     res.status(401).json({
-                        "text": "Mot de passe incorrect"
+                        "text": "Incorrect password"
                     })
                 }
             }

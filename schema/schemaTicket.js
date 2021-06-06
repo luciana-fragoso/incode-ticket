@@ -9,10 +9,6 @@ var ticketSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
-	responsible: {
-        type: String,
-        required: true
-    },
     priority: {
         type: String,
         required: true
@@ -21,6 +17,18 @@ var ticketSchema = mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    createdBy : {
+		type: String,
+		required: true
+	},
+    assignedTo: {
+        type: String,
+		required: false 
+    },
+    comment: {
+        type: [String],
+        required: false
     }
 },{ timestamps: { createdAt: 'created_at' }})
 

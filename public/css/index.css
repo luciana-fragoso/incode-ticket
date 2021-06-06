@@ -1,21 +1,55 @@
 table {
 	margin: auto;
-	border: 2px solid #000;
-	border-collapse: collapse;
+	border: 1px solid #000;
+	border-radius: 8px !important;
 }
 
 thead > tr > th {
-	border-bottom: 2px solid #000;
+	padding:  5px 0px;
+	font-size: 20px;
+	background-color: #e7e4ff;
+	color: #4B0082;
 }
 
-.idTicket {
+.idTicket{
 	width: 300px;
 }
 
-.showTicket, .editTicket {
+.showTicket, .editTicket,.statusTicket {
 	width: 150px;
 }
 
 td, th {
+	font-size: 18px;
 	text-align: center;
+	color: #343a40;
+	font-weight: bold;
+}
+
+tr:nth-child(even){
+	background-color: #FFFFFF;	
+}
+
+tr:nth-child(odd){
+	background-color: #f4e4ff;
+}
+
+.iconSee {
+	color: #4682B4  ! important;
+}
+
+.iconEdit {
+	color:	#DB7093;
+}
+
+#assignedSelect {
+	justify-content: center;
+	padding:10px;
+	font-size:16px;
+	border: 1px solid #000000;
+	border-radius: 8px;
+	margin-left: calc(50% - 125px);
+	margin-bottom: 20px;
+	background-color: #FFFFFF;
+	width: 250px;
 }
